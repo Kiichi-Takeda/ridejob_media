@@ -1,0 +1,52 @@
+<!-- 検索条件セクション -->
+<div class="container mt-3">
+  <%= link_to "戻る", root_path, class: "btn btn-outline-secondary" %>
+</div>
+<div class="container mt-4">
+  <div class="mb-3">
+    <!-- 選択された都道府県 -->
+    <% if params[:prefecture].present? %>
+      <span class="badge bg-primary me-2">都道府県: <%= params[:prefecture] %></span>
+    <% end %>
+
+    <!-- 選択されたこだわり条件 -->
+    <% if params[:conditions].present? %>
+      <span class="badge bg-secondary me-2">こだわり条件: <%= params[:conditions] %></span>
+    <% end %>
+  </div>
+</div>
+
+<!-- 求人一覧 -->
+<div class="container mt-4">
+  <h4 class="mb-3">検索結果</h4>
+  <% if @jobs.any? %>
+    <% @jobs.each do |job| %>
+      <div class="card mb-3">
+        <div class="card-body">
+          <!-- 求人タイトル（詳細ページへのリンク） -->
+          <h5 class="card-title">
+            <%= link_to job.title, job_path(job), class: "text-decoration-none text-primary" %>
+          </h5>
+          
+          <!-- 求人情報 -->
+          <p class="card-text">
+            <strong>会社名:</strong> <%= job.company.name %><br>
+            <strong>勤務地:</strong> <%= job.location %><br>
+            <strong>給与:</strong> <%= job.salary %>
+          </p>
+
+          <!-- こだわり条件のタグ -->
+          <% if job.tags.any? %>
+            <div class="mt-2">
+              <% job.tags.each do |tag| %>
+                <span class="badge bg-secondary me-1"><%= tag.name %></span>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <p>条件に一致する求人が見つかりませんでした。</p>
+  <% end %>
+</div>
