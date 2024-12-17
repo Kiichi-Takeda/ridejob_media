@@ -1,8 +1,294 @@
-  <!-- Header -->
-  <header class="text-center py-4 bg-light">
-    <h1 class="fw-bold">タクシー求人メディア</h1>
-    <p class="text-muted">Search job</p>
-  </header>
+      <style>
+        body {
+            background-color: #FDFCF3; /* 背景色 */
+        }
+        .hero-section {
+            background-color: #FDFCF3;
+            padding: 60px 0;
+        }
+        .hero-section h1 {
+            font-size: 3rem;
+            line-height: 1.3;
+            color: #333;
+        }
+        .btn-orange {
+            background-color: #FF8A4A;
+            color: #fff;
+        }
+        .tags span {
+            display: inline-block;
+            margin: 5px;
+            padding: 8px 12px;
+            background-color: #F2F6F5;
+            border-radius: 5px;
+            color: #333;
+        }
+        .navbar-nav .nav-link {
+            font-weight: bold;
+            color: #333;
+        }
+        .top-bar {
+            background-color: #fff;
+            font-size: 0.9rem;
+        }
+        .topimg {
+          width:100%;
+        }
+/* コラムセクション */
+.card {
+  border-radius: 10px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-img-top {
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+
+.card-title {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.badge {
+  font-size: 0.85rem;
+  border-radius: 5px;
+}
+
+.text-muted {
+  font-size: 0.9rem;
+}
+
+.small span {
+  font-size: 0.85rem;
+  color: #6c757d;
+}
+
+    </style>
+
+    <!-- Top Bar -->
+    <div class="top-bar py-2 px-3 d-flex justify-content-between align-items-center">
+        <span>タクシーセレクト求人情報サイト</span>
+        <div>
+            <a href="#" class="btn btn-orange btn-sm me-2">ログイン</a>
+            <a href="#" class="btn btn-outline-orange btn-sm border-orange text-orange">新規会員登録</a>
+        </div>
+    </div>
+
+        <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <h1>タクシーで叶える<br>あなたの新しい未来</h1>
+                    <p class="mb-4">「ライドジョブメディア」は、タクシー運転手で働きたい人に向けた求人サイトです。</p>
+                    <a href="#" class="btn btn-dark btn-lg">ライドジョブとは →</a>
+                </div>
+                <div class="col-md-6">
+                    <img class="topimg rounded" src="/images/mv_slide_2.webp" alt="スライド画像">
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- ヘッダーセクション -->
+<header class="header bg-success py-4 text-white text-center">
+  <h1 class="mb-0">条件から求人を探す</h1>
+</header>
+
+<!-- 検索条件セクション -->
+<section class="search-section py-4 bg-success">
+  <div class="container bg-white p-5 rounded">
+
+    <!-- ドロップダウンメニュー -->
+    <div class="d-flex justify-content-start align-items-center mb-3">
+      <div class="dropdown me-2">
+        <%= select_tag :job_type, options_for_select(["職種"]), class: "form-select" %>
+      </div>
+      <div class="dropdown me-2">
+        <%= select_tag :area, options_for_select(["エリア"]), class: "form-select" %>
+      </div>
+      <div class="dropdown me-2">
+        <%= select_tag :employment_type, options_for_select(["雇用形態", "正社員", "パート・アルバイト", "契約社員", "その他"]), class: "form-select" %>
+      </div>
+      <div class="dropdown me-2">
+        <%= select_tag :facility_type, options_for_select(["施設タイプ"]), class: "form-select" %>
+      </div>
+      <%= button_tag "検索する", class: "btn btn-dark" %>
+    </div>
+
+    <!-- キーワードから探す -->
+    <div>
+      <h5 class="mb-3">● 人気の条件から探す</h5>
+      <div class="container">
+        <div class="tags">
+            <% @tags.each do |tag| %>
+              <span>#<%= tag.name %></span>
+            <% end %>
+        </div>
+      </div>
+    </div>
+
+    <!-- 検索ボックス -->
+    <div class="mt-4">
+    <h5 class="mb-3">● キーワードから探す</h5>
+      <div class="input-group">
+        <%= text_field_tag :search, nil, placeholder: "ホテル、正社員、フロント、東京、など", class: "form-control" %>
+        <button class="btn btn-dark" type="button">🔍</button>
+      </div>
+    </div>
+
+    <!-- もっと見るボタン -->
+    <div class="text-end mt-3">
+      <%= link_to "もっと見る ➤", "#", class: "text-dark text-decoration-none" %>
+    </div>
+
+  </div>
+</section>
+
+<!-- ヘッダーセクション -->
+<header class="header bg-success py-4 text-white text-center">
+  <h1 class="mb-0">グループから求人を探す</h1>
+</header>
+
+  <!-- Group Search -->
+  <section class="container py-5">
+    <div class="row row-cols-2 row-cols-md-4 g-3 text-center">
+      <!-- Group Items -->
+      <div class="col">
+        <div class="border p-3 rounded">
+          <img src="https://via.placeholder.com/100" alt="Logo" class="img-fluid mb-2">
+          <p class="fw-bold">日本交通</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="border p-3 rounded">
+          <img src="https://via.placeholder.com/100" alt="Logo" class="img-fluid mb-2">
+          <p class="fw-bold">kmタクシー</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ピックアップ求人セクション -->
+<section class="py-5 bg-white">
+  <div class="container">
+    <!-- セクションタイトル -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="fw-bold">ピックアップ求人</h2>
+      <%= link_to "すべての求人を見る ➝", jobs_path, class: "btn btn-outline-dark" %>
+    </div>
+
+    <!-- 求人一覧 -->
+    <div class="row gy-4">
+      <% @jobs.limit(3).each do |job| %>
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm">
+            <!-- 画像 -->
+            <%= image_tag "", class: "card-img-top", alt: job.title %>
+            
+            <div class="card-body">
+              <!-- カテゴリーラベル -->
+              <div>
+                <% if job.employment_type.present? %>
+                  <span class="badge bg-light text-dark mb-2"><%= job.employment_type %></span>
+                <% end %>
+              </div>
+
+              <!-- 求人タイトル -->
+              <h5 class="card-title fw-bold"><%= job.title %></h5>
+              <!-- 会社名 -->
+              <p class="card-text text-muted"><%= job.company.name %></p>
+
+              <!-- 勤務地と給与 -->
+              <p class="mb-2">
+                <i class="bi bi-geo-alt text-success"></i>
+                <%= job.location %><br>
+                <i class="bi bi-currency-yen text-success"></i>
+                <%= job.salary %>
+              </p>
+
+              <!-- タグ -->
+              <div class="tags">
+                <% job.tags.limit(3).each do |tag| %>
+                  <span class="badge bg-light text-dark me-1">#<%= tag.name %></span>
+                <% end %>
+              </div>
+            </div>
+
+            <!-- 掲載期間 -->
+            <div class="card-footer bg-white border-0 text-muted">
+              掲載期間:
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<!-- コラムセクション -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <!-- セクションタイトル -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <p class="text-success fw-bold mb-1">COLUMN</p>
+        <h2 class="fw-bold mb-0">コラム</h2>
+        <p class="text-muted">宿泊業界での仕事のノウハウや移住生活の魅力など<br>転職に役立つ情報を発信しています。</p>
+      </div>
+      <%= link_to "すべてのコラムを見る ➝", "#", class: "btn btn-outline-dark" %>
+    </div>
+
+    <!-- コラム一覧 -->
+    <div class="row gy-4">
+      <% @articles.limit(4).each do |article| %>
+        <div class="col-md-3">
+          <div class="card h-100 border-0 shadow-sm">
+            <!-- 画像 -->
+            <% if article.image.attached? %>
+              <%= image_tag article.image, class: "card-img-top", alt: article.title %>
+            <% else %>
+              <%= image_tag "", class: "card-img-top", alt: "No Image" %>
+            <% end %>
+            
+            <!-- カード内容 -->
+            <div class="card-body px-0">
+              <!-- カテゴリーラベル -->
+              <span class="badge bg-success mb-2 px-2 py-1"><%= article.category %></span>
+
+              <!-- タイトル -->
+              <h6 class="card-title fw-bold">
+                <%= link_to article.title, "#", class: "text-dark text-decoration-none" %>
+              </h6>
+
+              <!-- 公開日 -->
+              <p class="text-muted mb-1">
+                <%= article.published_at.strftime("%Y.%m.%d") if article.published_at.present? %>
+              </p>
+
+              <!-- タグ -->
+              <% if article.article_specific_tags.any? %>
+                <div class="small text-muted">
+                  <% article.article_specific_tags.each do |tag| %>
+                    <span class="me-1">#<%= tag.name %></span>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+
 
   <!-- Search Options -->
   <section class="container text-center py-3">
@@ -22,41 +308,7 @@
       </div>
     </div>
   </section>
-
-  <!-- Search Bar -->
-  <section class="bg-secondary py-4 text-white">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-md-4 text-center mb-2 mb-md-0">
-          <strong>📞 0120-5963-15</strong>
-        </div>
-        <div class="col-md-8 d-flex">
-          <input type="text" class="form-control me-2" placeholder="キーワードを入力してください...">
-          <button class="btn btn-warning">検索する</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Group Search -->
-  <section class="container py-5">
-    <h2 class="text-center mb-4 fw-bold">グループから探す</h2>
-    <div class="row row-cols-2 row-cols-md-4 g-3 text-center">
-      <!-- Group Items -->
-      <div class="col">
-        <div class="border p-3 rounded">
-          <img src="https://via.placeholder.com/100" alt="Logo" class="img-fluid mb-2">
-          <p class="fw-bold">日本交通</p>
-        </div>
-      </div>
-      <div class="col">
-        <div class="border p-3 rounded">
-          <img src="https://via.placeholder.com/100" alt="Logo" class="img-fluid mb-2">
-          <p class="fw-bold">kmタクシー</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  
 
   <!-- Popularity Search -->
   <section class="bg-light py-5">

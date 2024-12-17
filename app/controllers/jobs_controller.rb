@@ -14,7 +14,7 @@ class JobsController < ApplicationController
       @jobs = @jobs = @jobs.joins(:tags).where(tags: { name: params[:conditions] }).distinct
     end
   end
-    def show
+  def show
     @job = Job.find(params[:id])
   end
 end
