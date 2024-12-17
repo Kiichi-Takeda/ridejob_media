@@ -1,0 +1,11 @@
+<h3>CSVインポート</h3>
+
+<%= form_tag upload_csv_admin_jobs_path, multipart: true, method: :post do %>
+  <div class="mb-3">
+    <%= label_tag :file, "CSVファイルを選択" %>
+    <%= file_field_tag :file, accept: ".csv", class: "form-control" %>
+  </div>
+  <%= submit_tag "インポート", class: "btn btn-primary" %>
+<% end %>
+
+<%= link_to "戻る", admin_jobs_path, class: "btn btn-secondary mt-3" %>
