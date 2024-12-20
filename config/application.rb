@@ -24,5 +24,7 @@ module Fff
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
     config.assets.enabled = true
+    config.assets.version = '1.0'
+    config.assets.paths << Rails.root.join("app", "assets", "images")
   end
 end

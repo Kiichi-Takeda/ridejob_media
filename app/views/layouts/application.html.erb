@@ -19,8 +19,10 @@
     <link rel="apple-touch-icon" href="/icon.png">
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+    <% unless controller.class.name.starts_with?("ActiveAdmin") %>
+      <%= stylesheet_link_tag "application", media: "all" %>
+      <%= javascript_include_tag "application" %>
+    <% end %>
   </head>
 
   <body>
